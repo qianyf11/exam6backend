@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yb.exam6backend.mapper.ProductsMapper">
+<resultMap id="proMap" type="com.yb.exam6backend.pojo.Products">
+    <result property="id" column="id"/>
+    <result property="productName" column="productName"/>
+    <result property="productDate" column="productDate"/>
+    <result property="productSum" column="productSum"/>
+    <result property="productDesc" column="productDesc"/>
+    <result property="productPrice" column="productPrice"/>
+    <association property="qualities" javaType="com.yb.exam6backend.pojo.Qualities">
+        <result property="id" column="qualities_id"/>
+        <result property="score" column="score"/>
+        <result property="qualityDesc" column="qualityDesc"/>
+        <result property="productId" column="productId"/>
+    </association>
+</resultMap>
+    <select id="queryAll" resultType="com.yb.exam6backend.pojo.Products">
+        select * from products
+    </select>
+    <select id="queryAllView" resultMap="proMap">
+        <bind name="productNamePattern" value="'%'.concat(productName).concat('%')" />
+        SELECT
+        p.id,
+        p.productName,
+        p.productDate,
+        p.productSum,
+        p.productDesc,
+        p.productPrice,
+        q.score,
+        q.qualityDesc
+        FROM
+        products p
+        LEFT JOIN
+        qualities q ON p.id = q.productId
+        <where>
+            <if test="productName != null and productName != ''">
+                p.productName LIKE #{productNamePattern}
+            </if>
+        </where>
+    </select>
+</mapper>
