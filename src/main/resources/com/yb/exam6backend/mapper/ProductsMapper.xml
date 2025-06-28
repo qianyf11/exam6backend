@@ -21,7 +21,6 @@
         select * from products
     </select>
     <select id="queryAllView" resultMap="proMap">
-        <bind name="productNamePattern" value="'%'.concat(productName).concat('%')" />
         SELECT
         p.id,
         p.productName,
@@ -37,7 +36,7 @@
         qualities q ON p.id = q.productId
         <where>
             <if test="productName != null and productName != ''">
-                p.productName LIKE #{productNamePattern}
+                p.productName LIKE #{productName}
             </if>
         </where>
     </select>
