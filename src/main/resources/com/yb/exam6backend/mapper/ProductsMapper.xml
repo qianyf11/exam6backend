@@ -17,6 +17,25 @@
         <result property="productId" column="productId"/>
     </association>
 </resultMap>
+    <insert id="add">
+        insert into products values (default,
+                                     #{productName},
+                                     #{productDate},
+                                     #{productSum},
+                                     #{productDesc},
+                                     #{productPrice})
+
+    </insert>
+    <update id="update">
+        update products set
+                            productName=#{productName},
+                            productDate=#{productDate},
+                            productSum=#{productSum},
+                            productDesc=#{productDesc},
+                            productPrice=#{productPrice}
+        where id=#{id}
+
+    </update>
     <select id="queryAll" resultType="com.yb.exam6backend.pojo.Products">
         select * from products
     </select>
@@ -39,5 +58,8 @@
                 p.productName LIKE #{productName}
             </if>
         </where>
+    </select>
+    <select id="queryById" resultType="com.yb.exam6backend.pojo.Products">
+        select * from products where productName=#{productName}
     </select>
 </mapper>

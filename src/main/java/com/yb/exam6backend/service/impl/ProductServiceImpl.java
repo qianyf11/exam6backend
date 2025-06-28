@@ -25,4 +25,19 @@ public class ProductServiceImpl implements IProductService {
     public List<Products> queryAllView(String productName) {
         return productsMapper.queryAllView(productName);
     }
+
+    @Override
+    public Integer add(Products products) {
+        return productsMapper.add(products);
+    }
+
+    @Override
+    public Integer update(Products products) {
+        return productsMapper.update(products);
+    }
+
+    @Override
+    public Products queryById(String productName) {
+        return productsMapper.queryById(productName);
+    }
 }
