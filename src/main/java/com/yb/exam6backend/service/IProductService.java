@@ -14,4 +14,6 @@ public interface IProductService {
     Integer update(Products products);
 
     Products queryById(String productName);
+
+    Products getProductById(Integer id);
 }

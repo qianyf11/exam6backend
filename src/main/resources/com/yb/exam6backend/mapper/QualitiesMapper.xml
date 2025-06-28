@@ -4,4 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yb.exam6backend.mapper.QualitiesMapper">
 
+    <insert id="insertQuality">
+        insert into qualities (score, qualityDesc, productId)
+        values (#{score}, #{qualityDesc}, #{productId})
+    </insert>
+    <update id="updateQuality">
+        update qualities
+        set score = #{score}, qualityDesc = #{qualityDesc}
+        where productId = #{productId}
+    </update>
+    <select id="findByProductId" resultType="com.yb.exam6backend.pojo.Qualities">
+        select id, score, qualityDesc , productId
+        from qualities
+        where productId = #{productId}
+    </select>
 </mapper>

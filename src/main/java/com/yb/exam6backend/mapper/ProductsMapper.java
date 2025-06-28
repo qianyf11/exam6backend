@@ -16,4 +16,6 @@ public interface ProductsMapper {
     Integer update(Products products);
 
     Products queryById(String productName);
+
+    Products getProductById(Integer id);
 }

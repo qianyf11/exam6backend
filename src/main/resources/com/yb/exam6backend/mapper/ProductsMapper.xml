@@ -62,4 +62,7 @@
     <select id="queryById" resultType="com.yb.exam6backend.pojo.Products">
         select * from products where productName=#{productName}
     </select>
+    <select id="getProductById" resultType="com.yb.exam6backend.pojo.Products">
+        select * from products where id=#{id}
+    </select>
 </mapper>

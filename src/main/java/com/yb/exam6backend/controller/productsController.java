@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yb.exam6backend.pojo.Products;
 import com.yb.exam6backend.service.IProductService;
+import com.yb.exam6backend.service.IQualityService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +16,18 @@ import java.util.List;
 public class productsController {
     @Autowired
     private IProductService productService;
+    @Autowired
+    private IQualityService qualityService;
+    @GetMapping("getProductById")
+    public Products getProductById(@RequestParam Integer id){
+        return productService.getProductById(id);
+    }
     @GetMapping("queryAll")
     public List<Products> queryAll(){
         return productService.queryAll();
     }
     @GetMapping("queryById")
-    public Products queryById(String productName){
+    public Products queryById(@RequestParam String productName){
         return productService.queryById(productName);
     }
     @GetMapping("queryAllView")
